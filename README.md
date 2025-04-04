@@ -1,2 +1,7 @@
 # c
-c compiler and build tool in python for linux.
+
+c compiler and build tool in rust for linux.
+
+## License
+
+MIT

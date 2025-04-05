@@ -23,4 +23,6 @@ It has three binary packages in src directory:
 
 ## License
 
-MIT
+This project is under MIT license.
+
+But, this project uses musl libc library as dependency, which has its own license.

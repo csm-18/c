@@ -17,6 +17,10 @@ It has three binary packages in src directory:
 2. cpp - c preprocessor
 3. cc - c compiler
 
+---
+
+- **musl-build** directory contains musl libc which is used by the c compiler.
+
 ## License
 
 MIT

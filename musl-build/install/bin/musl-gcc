@@ -1,0 +1,2 @@
+#!/bin/sh
+exec "${REALGCC:-gcc}" "$@" -specs "/home/sai/Documents/csm/projects/c/c/musl-build/musl/build/install/lib/musl-gcc.specs"

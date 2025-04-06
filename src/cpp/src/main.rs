@@ -1,6 +1,6 @@
 use std::process::exit;
 
-
+mod preprocessor;
 
 const VERSION:&str = "0.1.0";
 fn main() {
@@ -26,12 +26,13 @@ fn main() {
         
         //include paths for c header files
         let mut include_paths: Vec<String> = vec![];
-        //first path is to the std lib (musl)
+        //first path is to libc(musl) headers (temporarily).
         include_paths.push("../../musl-build/install/include/".to_string());
 
         //c header files
         // let mut c_header_files: Vec<String> = vec![];
         
+        //look for c source files and include paths
         for arg in args[1..].iter() {
             if arg.len() >= 3 && &arg[arg.len()-2..] == ".c" {
                 c_src_files.push(arg.to_string());
@@ -43,5 +44,9 @@ fn main() {
                 exit(1);
             }
         }
+
+
+        //cpp preprocessing
+        preprocessor::preprocess(c_src_files, include_paths);
     }
 }

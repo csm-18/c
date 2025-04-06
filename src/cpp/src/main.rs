@@ -26,6 +26,8 @@ fn main() {
         
         //include paths for c header files
         let mut include_paths: Vec<String> = vec![];
+        //first path is to the std lib (musl)
+        include_paths.push("../../musl-build/install/include/".to_string());
 
         //c header files
         // let mut c_header_files: Vec<String> = vec![];

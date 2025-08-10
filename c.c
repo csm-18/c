@@ -1,7 +1,14 @@
 #include <stdio.h>
 
+
+//version
+const char* VERSION = "c 0.1.0";
+
 int main(int argc, char *argv[]) {
-    printf("%s\n",argv[0]);
+    if (argc == 1)
+    {
+        puts(VERSION);
+    }
 
     
 }

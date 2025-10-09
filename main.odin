@@ -60,7 +60,14 @@ main :: proc(){
 
         }
             
+    }else if len(args) == 3{
+        filename := args[2]
+        if (args[1] == "compile" || args[1] == "-c") && len(filename) > 2 && filename[len(filename)-2:] == ".c"{
+            fmt.println("c: compiling", filename)
+
+        }
     }
+
 }
 
 

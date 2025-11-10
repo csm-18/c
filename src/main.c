@@ -29,7 +29,7 @@ int main(int argc,char* argv[])
         printf(" c help\n");
     }else if (argc >= 2)
     {
-        if (argc == 2 && strcmp(argv[1], "version") == 0 || strcmp(argv[1], "-v") == 0)
+        if ((argc == 2 && strcmp(argv[1], "version") == 0) || strcmp(argv[1], "-v") == 0)
         {
             printf("c %s\n",C_VERSION);
         }else if (argc == 2 && strcmp(argv[1], "init") == 0)
@@ -105,7 +105,6 @@ int main(int argc,char* argv[])
         {
             //current working directory name
             const char* cwd_name = get_cwd_name();
-            printf("running in %s\n",cwd_name);
 
             //build the project
             char build_command[200];

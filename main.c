@@ -3,14 +3,24 @@
 #include<sys/stat.h>
 #include<stdbool.h>
 #include<unistd.h>
+#include<sys/types.h>
+
+
+const char* hello_world_c_program = "#include<stdio.h>\n\n"
+                                    "int main(){\n"
+                                    "   printf(\"hello world!\\n\");\n"
+                                    "   return 0;\n"
+                                    "}\n";
 
 
 bool folder_exists(char* folder_name);
-
+bool create_file_with_text(char* filename, const char* text);
 
 const char* C_VERSION = "0.0.1";
-int main(int argc,char* argv[]){
-    if(argc == 1){
+int main(int argc,char* argv[])
+{
+    if(argc == 1)
+    {
         printf("c %s\n",C_VERSION);
         printf("A build tool for c (like cargo for rust).\n\n");
         printf("For more info:\n");
@@ -24,13 +34,17 @@ int main(int argc,char* argv[]){
         {
             printf("Initializing project...\n\n");
 
-            if(folder_exists("./include")){
+            //check if files and folders already exist!
+            if(folder_exists("./include"))
+            {
                 printf("Error: 'include/' folder already exists!\n");
                 return 1;
-            }else if(folder_exists("./src")){
+            }else if(folder_exists("./src"))
+            {
                 printf("Error: 'src/' folder already exists!\n");
                 return 1;
-            }else if(folder_exists("./build")){
+            }else if(folder_exists("./build"))
+            {
                 printf("Error: 'build/' folder already exists!\n");
                 return 1;
             }else if (access(".gitignore",F_OK) == 0)
@@ -38,6 +52,51 @@ int main(int argc,char* argv[]){
                 printf("Error: '.gitignore' file already exists!\n");
                 return 1;
             }
+
+
+            //create project structure
+            if(mkdir("include",0755) == 0)
+            {
+                printf("created  include/\n");
+            }else
+            {
+                printf("Error while creating 'include/' folder!\n");
+                return 0;
+            }
+
+            if(mkdir("src",0755) == 0)
+            {
+                if(create_file_with_text("src/main.c",hello_world_c_program))
+                {
+                    printf("created  src/main.c\n");
+                }else
+                {
+                    printf("Error while creating 'src/main.c'!\n");
+                }
+            }else
+            {
+                printf("Error while creating 'src/' folder!\n");
+                return 0;
+            }
+            
+
+            if(mkdir("build",0755) == 0)
+            {
+                printf("created  build/\n");
+            }else
+            {
+                printf("Error while creating 'build/' folder!\n");
+                return 0;
+            }
+
+            if(create_file_with_text(".gitignore","build/\n"))
+            {
+                printf("created  .gitignore\n");
+            }else
+            {
+                printf("Error while creating '.gitignore'!\n");
+            }
+            
         }
     }
     
@@ -52,4 +111,16 @@ bool folder_exists(char* folder_name){
     }else{
         return false;
     }
+}
+
+bool create_file_with_text(char* filename, const char* text){
+    FILE *file = fopen(filename, "w");
+    if(file == NULL){
+        return false;
+    }
+
+    fputs(text,file);
+    fclose(file);
+
+    return true;
 }

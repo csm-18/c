@@ -4,7 +4,7 @@
 #include<stdbool.h>
 #include<unistd.h>
 #include<sys/types.h>
-
+#include<limits.h>
 
 const char* hello_world_c_program = "#include<stdio.h>\n\n"
                                     "int main(){\n"
@@ -15,6 +15,7 @@ const char* hello_world_c_program = "#include<stdio.h>\n\n"
 
 bool folder_exists(char* folder_name);
 bool create_file_with_text(char* filename, const char* text);
+const char* get_cwd_name();
 
 const char* C_VERSION = "0.0.1";
 int main(int argc,char* argv[])
@@ -25,12 +26,12 @@ int main(int argc,char* argv[])
         printf("A build tool for c (like cargo for rust).\n\n");
         printf("For more info:\n");
         printf(" c help\n");
-    }else if (argc == 2)
+    }else if (argc >= 2)
     {
-        if (strcmp(argv[1], "version") == 0 || strcmp(argv[1], "-v") == 0)
+        if (argc == 2 && strcmp(argv[1], "version") == 0 || strcmp(argv[1], "-v") == 0)
         {
             printf("c %s\n",C_VERSION);
-        }else if (strcmp(argv[1], "init") == 0)
+        }else if (argc == 2 && strcmp(argv[1], "init") == 0)
         {
             printf("Initializing project...\n\n");
 
@@ -61,7 +62,7 @@ int main(int argc,char* argv[])
             }else
             {
                 printf("Error while creating 'include/' folder!\n");
-                return 0;
+                return 1;
             }
 
             if(mkdir("src",0755) == 0)
@@ -72,11 +73,12 @@ int main(int argc,char* argv[])
                 }else
                 {
                     printf("Error while creating 'src/main.c'!\n");
+                    return 1;
                 }
             }else
             {
                 printf("Error while creating 'src/' folder!\n");
-                return 0;
+                return 1;
             }
             
 
@@ -86,7 +88,7 @@ int main(int argc,char* argv[])
             }else
             {
                 printf("Error while creating 'build/' folder!\n");
-                return 0;
+                return 1;
             }
 
             if(create_file_with_text(".gitignore","build/\n"))
@@ -95,8 +97,15 @@ int main(int argc,char* argv[])
             }else
             {
                 printf("Error while creating '.gitignore'!\n");
+                return 1;
             }
             
+        }else if(strcmp(argv[1],"run") == 0)
+        {
+            //current working directory name
+            const char* cwd_name = get_cwd_name();
+            printf("running in %s\n",cwd_name);
+
         }
     }
     
@@ -123,4 +132,23 @@ bool create_file_with_text(char* filename, const char* text){
     fclose(file);
 
     return true;
+}
+
+const char* get_cwd_name()
+{
+    static char cwd[PATH_MAX];
+    if(getcwd(cwd,sizeof(cwd))==NULL)
+    {
+        return NULL;
+    }
+
+    //extract the folder name (after the last '/')
+    char *base = strrchr(cwd,'/');
+    if(base)
+        base++;
+    else
+        base = cwd;
+
+    return base;    
+
 }

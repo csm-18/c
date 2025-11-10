@@ -107,10 +107,29 @@ int main(int argc,char* argv[])
             const char* cwd_name = get_cwd_name();
             printf("running in %s\n",cwd_name);
 
-            //build the project and run
+            //build the project
             char build_command[200];
             sprintf(build_command,"gcc -Wall -Wextra -Iinclude $(find src -name '*.c') -o build/%s",cwd_name);
-            system(build_command);
+            if(system(build_command) != 0)
+            {
+                printf("Error while building the project!\n");
+                return 1;
+            }
+
+            //run the project
+            char run_command[600];
+            sprintf(run_command,"./build/%s",cwd_name);
+            // int x = 2;
+            // while(x < argc){
+            //     snprintf(run_command, sizeof(run_command),"%s %s",run_command,argv[x]);
+            //     x +=1;
+            // }
+            if(system(run_command) != 0)
+            {
+                printf("Error while running the project!\n");
+                return 1;
+                
+            }
 
         }
     }

@@ -5,6 +5,7 @@
 #include<unistd.h>
 #include<sys/types.h>
 #include<limits.h>
+#include<stdlib.h>
 
 const char* hello_world_c_program = "#include<stdio.h>\n\n"
                                     "int main(){\n"
@@ -105,6 +106,11 @@ int main(int argc,char* argv[])
             //current working directory name
             const char* cwd_name = get_cwd_name();
             printf("running in %s\n",cwd_name);
+
+            //build the project and run
+            char build_command[200];
+            sprintf(build_command,"gcc -Wall -Wextra -Iinclude $(find src -name '*.c') -o build/%s",cwd_name);
+            system(build_command);
 
         }
     }

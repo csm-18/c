@@ -123,6 +123,12 @@ int main(int argc,char* argv[])
             //run the project
             struct string* run_command = new_string("./build/");
             append_string(run_command,cwd_name);
+            int x = 2;
+            while(x < argc){
+                append_string(run_command," ");
+                append_string(run_command,argv[x]);
+                x+=1;
+            }
             // int x = 2;
             // while(x < argc){
             //     snprintf(run_command, sizeof(run_command),"%s %s",run_command,argv[x]);

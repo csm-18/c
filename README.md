@@ -12,7 +12,7 @@ version - prints this tools version.
 
 init - creates a new c project in current directory.
 
-run - builds and runs the project (cli args to the output binary, are currently not supported!).
+run - builds and runs the project (you can pass cli args after run with a space).
 
 ## Dependencies
 
@@ -47,6 +47,10 @@ run - builds and runs the project (cli args to the output binary, are currently 
 - Build and run the project:
 
   `c run`
+
+  To pass cli args:
+
+  `c run hello world`
 
 ## Generated project structure by init command
 

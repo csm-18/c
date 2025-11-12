@@ -18,15 +18,35 @@ run - builds and runs the project (cli args to the output binary, are currently 
 
 - os: linux
 
+- shell: bash
+
 - compiler: gcc
 
 ## Building the project
 
-I assume you know how to compile a single c file(src/main.c) into output file called c.
+- Clone the repo.
 
-If not then you can just google it or gpt it!
+- Inside project folder that you cloned, run:
 
-After that, just place the output binary where you like and add it to the PATH environment variable.
+`gcc -Wall -Wextra $(find src -name '*.c') -o build/c`
+
+- The binary will be created in build/ directory.
+
+- After that, just place the output binary where you like and add it to the PATH environment variable.
+
+## Usage
+
+- Print Version:
+
+  `c version`
+
+- New project in current directory:
+
+  `c init`
+
+- Build and run the project:
+
+  `c run`
 
 ## Generated project structure by init command
 

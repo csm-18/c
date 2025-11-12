@@ -23,7 +23,7 @@ bool folder_exists(char* folder_name);
 bool create_file_with_text(char* filename, const char* text);
 char* get_cwd_name();
 
-const char* C_VERSION = "0.0.1";
+const char* C_VERSION = "0.0.2";
 int main(int argc,char* argv[])
 {
     if(argc == 1)

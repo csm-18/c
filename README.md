@@ -1,4 +1,4 @@
-c (v0.0.1)
+c (v0.0.2)
 
 A build tool for c (like cargo for rust).
 

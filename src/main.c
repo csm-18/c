@@ -1,3 +1,6 @@
+#include"string_type.h"
+
+
 #include<stdio.h>
 #include<string.h>
 #include<sys/stat.h>
@@ -6,6 +9,8 @@
 #include<sys/types.h>
 #include<limits.h>
 #include<stdlib.h>
+
+
 
 const char* hello_world_c_program = "#include<stdio.h>\n\n"
                                     "int main(){\n"
@@ -16,7 +21,7 @@ const char* hello_world_c_program = "#include<stdio.h>\n\n"
 
 bool folder_exists(char* folder_name);
 bool create_file_with_text(char* filename, const char* text);
-const char* get_cwd_name();
+char* get_cwd_name();
 
 const char* C_VERSION = "0.0.1";
 int main(int argc,char* argv[])
@@ -104,7 +109,7 @@ int main(int argc,char* argv[])
         }else if(strcmp(argv[1],"run") == 0)
         {
             //current working directory name
-            const char* cwd_name = get_cwd_name();
+            char* cwd_name = get_cwd_name();
 
             //build the project
             char build_command[200];
@@ -116,19 +121,20 @@ int main(int argc,char* argv[])
             }
 
             //run the project
-            char run_command[600];
-            sprintf(run_command,"./build/%s",cwd_name);
+            struct string* run_command = new_string("./build/");
+            append_string(run_command,cwd_name);
             // int x = 2;
             // while(x < argc){
             //     snprintf(run_command, sizeof(run_command),"%s %s",run_command,argv[x]);
             //     x +=1;
             // }
-            if(system(run_command) != 0)
+            if(system(run_command->value) != 0)
             {
                 printf("Error while running the project!\n");
                 return 1;
                 
             }
+            free_string(run_command);
 
         }
     }
@@ -158,7 +164,7 @@ bool create_file_with_text(char* filename, const char* text){
     return true;
 }
 
-const char* get_cwd_name()
+char* get_cwd_name()
 {
     static char cwd[PATH_MAX];
     if(getcwd(cwd,sizeof(cwd))==NULL)

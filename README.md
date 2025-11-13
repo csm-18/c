@@ -28,7 +28,11 @@ run - builds and runs the project (you can pass cli args after run with a space)
 
 - Inside project folder that you cloned, run:
 
-`gcc -Wall -Wextra $(find src -name '*.c') -o build/c`
+  `mkdir build`
+
+- then:
+
+  `gcc -Wall -Wextra $(find src -name '*.c') -o build/c`
 
 - The binary will be created in build/ directory.
 

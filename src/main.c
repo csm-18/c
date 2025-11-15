@@ -1,4 +1,5 @@
-#include"string_type.h"
+#include "string_type.h"
+#include "run-command.h"
 
 
 #include<stdio.h>
@@ -21,7 +22,7 @@ const char* hello_world_c_program = "#include<stdio.h>\n\n"
 
 bool folder_exists(char* folder_name);
 bool create_file_with_text(char* filename, const char* text);
-char* get_cwd_name();
+
 
 const char* C_VERSION = "0.0.2";
 int main(int argc,char* argv[])
@@ -108,39 +109,7 @@ int main(int argc,char* argv[])
             
         }else if(strcmp(argv[1],"run") == 0)
         {
-            //current working directory name
-            char* cwd_name = get_cwd_name();
-
-            //build the project
-            char build_command[200];
-            sprintf(build_command,"gcc -Wall -Wextra -Iinclude $(find src -name '*.c') -o build/%s",cwd_name);
-            if(system(build_command) != 0)
-            {
-                printf("Error while building the project!\n");
-                return 1;
-            }
-
-            //run the project
-            struct string* run_command = new_string("./build/");
-            append_string(run_command,cwd_name);
-            int x = 2;
-            while(x < argc){
-                append_string(run_command," ");
-                append_string(run_command,argv[x]);
-                x+=1;
-            }
-            // int x = 2;
-            // while(x < argc){
-            //     snprintf(run_command, sizeof(run_command),"%s %s",run_command,argv[x]);
-            //     x +=1;
-            // }
-            if(system(run_command->value) != 0)
-            {
-                printf("Error while running the project!\n");
-                return 1;
-                
-            }
-            free_string(run_command);
+            run(argc,argv);
 
         }
     }
@@ -170,21 +139,3 @@ bool create_file_with_text(char* filename, const char* text){
     return true;
 }
 
-char* get_cwd_name()
-{
-    static char cwd[PATH_MAX];
-    if(getcwd(cwd,sizeof(cwd))==NULL)
-    {
-        return NULL;
-    }
-
-    //extract the folder name (after the last '/')
-    char *base = strrchr(cwd,'/');
-    if(base)
-        base++;
-    else
-        base = cwd;
-
-    return base;    
-
-}

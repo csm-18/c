@@ -1,4 +1,4 @@
-c (v0.0.2)
+c (v0.0.3)
 
 A build tool for c (like cargo for rust).
 
@@ -62,13 +62,14 @@ run - builds and runs the project (you can pass cli args after run with a space)
 
 ### Suppose your project folder is 'hello':
 
-![project-structure](./init-command-generated-project-structure-v0.0.1.png)
+![project-structure](./init-command-generated-project-structure-v0.0.3.png)
 
 Here:
 
 1. src folder - for all c src files (you can nest them in sub-folders).
 2. include folder - for all header files.
 3. lib folder - for all source libraries that are created using c tool.
+   (csm-c library is a util library that is added to lib folder while we create new project using 'init' command!)
 4. build folder - where the output binary will go.
 5. .gitignore - for excluding the build folder from git history.
 

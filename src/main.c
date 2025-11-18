@@ -24,7 +24,7 @@ bool folder_exists(char* folder_name);
 bool create_file_with_text(char* filename, const char* text);
 
 
-const char* C_VERSION = "0.0.2";
+const char* C_VERSION = "0.0.3";
 int main(int argc,char* argv[])
 {
     if(argc == 1)

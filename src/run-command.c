@@ -18,7 +18,7 @@ void run(int argc, char* argv[]){
             char* cwd_name = get_cwd_name();
 
             //build the project
-            struct string* build_command = new_string("gcc -Wall -Wextra -Iinclude $(find src -name '*.c') -o build/");
+            struct string* build_command = new_string("gcc -Wall -Wextra -Iinclude $(find src -name '*.c') $(find lib -type f -path '*/src/*.c') $(find lib -type d -path '*/include' -printf '-I %p ') -o build/");
             append_string(build_command,cwd_name);
             if(system(build_command->value) != 0)
             {

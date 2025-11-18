@@ -1,4 +1,4 @@
-#include "string_type.h"
+#include "csm-c/string_type.h"
 
 
 #include<stdio.h>

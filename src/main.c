@@ -1,4 +1,4 @@
-#include "string_type.h"
+#include "csm-c/string_type.h"
 #include "run-command.h"
 
 
@@ -75,12 +75,12 @@ int main(int argc,char* argv[])
             if(mkdir("lib",0755) == 0)
             {
                 printf("created  lib/\n");
-                if(system("git clone https://github.com/csm-c/csm-c ./lib/csm-c") != 0)
+                if(system("git clone https://github.com/csm-c/csm-c ./lib/csm-c > /dev/null 2>&1") != 0 && system("find lib -type d -name .git -exec rm -rf {} +") != 0)
                 {
                     printf("Error while setting up csm-c library!\n");
                     exit(1);
                 }
-                printf("Added csm-c library to lib/ folder!\n");
+                printf("added    csm-c library to lib/\n");
             }else
             {
                 printf("Error while creating 'lib/' folder!\n");

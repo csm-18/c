@@ -18,9 +18,9 @@ void run(int argc, char* argv[]){
             char* cwd_name = get_cwd_name();
 
             //build the project
-            char build_command[200];
-            sprintf(build_command,"gcc -Wall -Wextra -Iinclude $(find src -name '*.c') -o build/%s",cwd_name);
-            if(system(build_command) != 0)
+            struct string* build_command = new_string("gcc -Wall -Wextra -Iinclude $(find src -name '*.c') -o build/");
+            append_string(build_command,cwd_name);
+            if(system(build_command->value) != 0)
             {
                 printf("Error while building the project!\n");
                 exit(1);

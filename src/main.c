@@ -72,6 +72,15 @@ int main(int argc,char* argv[])
                 return 1;
             }
 
+            if(mkdir("lib",0755) == 0)
+            {
+                printf("created  lib/\n");
+            }else
+            {
+                printf("Error while creating 'lib/' folder!\n");
+                return 1;
+            }
+
             if(mkdir("src",0755) == 0)
             {
                 if(create_file_with_text("src/main.c",hello_world_c_program))
@@ -98,7 +107,7 @@ int main(int argc,char* argv[])
                 return 1;
             }
 
-            if(create_file_with_text(".gitignore","build/\n"))
+            if(create_file_with_text(".gitignore","build/\n\nlib/**/.git/\n"))
             {
                 printf("created  .gitignore\n");
             }else

@@ -66,8 +66,9 @@ Here:
 
 1. src folder - for all c src files (you can nest them in sub-folders).
 2. include folder - for all header files.
-3. build folder - where the output binary will go.
-4. .gitignore - for excluding the build folder from git history.
+3. lib folder - for all source libraries that are created using c tool.
+4. build folder - where the output binary will go.
+5. .gitignore - for excluding the build folder from git history.
 
 ## License
 

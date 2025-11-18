@@ -75,6 +75,12 @@ int main(int argc,char* argv[])
             if(mkdir("lib",0755) == 0)
             {
                 printf("created  lib/\n");
+                if(system("git clone https://github.com/csm-c/csm-c ./lib/csm-c") != 0)
+                {
+                    printf("Error while setting up csm-c library!\n");
+                    exit(1);
+                }
+                printf("Added csm-c library to lib/ folder!\n");
             }else
             {
                 printf("Error while creating 'lib/' folder!\n");

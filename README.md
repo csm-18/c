@@ -22,6 +22,8 @@ run - builds and runs the project (you can pass cli args after run with a space)
 
 - compiler: gcc
 
+- git
+
 ## Building the project
 
 - Clone the repo.
